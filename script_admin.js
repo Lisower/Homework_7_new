@@ -12,7 +12,7 @@ Button_Stats.addEventListener('click', () => {
             let html = '<tr><th>Язык программирования</th><th>Количество использований</th></tr>';
             /*data.forEach(row => {
                 html += `<tr><td>${row.name}</td><td>${row.count}</td></tr>`;
-            }); /*
+            }); */
             table.innerHTML = html;
             Popup.innerHTML = '';
             Popup.appendChild(table);
