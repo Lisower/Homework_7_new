@@ -1,0 +1,80 @@
+html,body{
+    min-height:100vh;
+    color: rgb(232, 224, 3);
+    align-items: center;
+    display:flex;
+    flex-direction: column;
+    background-color: rgb(8, 1, 32);
+}
+Button{
+    margin-top:20vh;
+    color: rgb(232, 224, 3);
+    background-color: rgb(0, 0, 0);
+    font-size:20px;
+    font-style:italic;
+    padding-left:30px; padding-right:30px;
+    padding-top:15px; padding-bottom:15px;
+    border: 2px solid rgb(232, 224, 3);
+    border-radius: 15px;
+    overflow:auto;
+}
+Form Button{
+    margin-top:30px;
+}
+Form{
+    border: 2px solid rgb(232, 224, 3);
+    border-radius: 15px;
+    text-align:center;
+    width:30vw;
+    height:90vh;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:5vh;
+    background-color: rgb(8, 1, 32);
+    min-width:350px;
+}
+Form h1{
+    font-style:italic;
+}
+Form input,textarea,select{
+    margin:1.5vh;
+}
+.Popup{
+    display:None;
+    width:100vw;
+    height:100vh;
+    position:fixed;
+    top:0;
+    left:0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+.Exit_Form {
+    position: fixed;
+    top: 7vh;
+    left: 61.5vw;
+    margin-top: 0px;
+    padding-top: 1px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    border: 2px solid rgb(232, 224, 3);
+    border-radius: 10px;
+    text-align: center;
+    width: 35px;
+    height: 35px;
+}
+.error {
+  border: 2px solid red;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
