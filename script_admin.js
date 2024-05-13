@@ -6,13 +6,13 @@ const Form = document.getElementById('Form');
 
 Button_Stats.addEventListener('click', () => {
     fetch('./admin.php?action=fetch_stats')
-        // .then(response => response.json())
+        .then(response => response.json())
         .then(data => {
             const table = document.createElement('table');
             let html = '<tr><th>Язык программирования</th><th>Количество использований</th></tr>';
-            /*data.forEach(row => {
+            data.forEach(row => {
                 html += `<tr><td>${row.name}</td><td>${row.count}</td></tr>`;
-            }); */
+            });
             table.innerHTML = html;
             Popup.innerHTML = '';
             Popup.appendChild(table);
