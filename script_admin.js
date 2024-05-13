@@ -6,7 +6,7 @@ const Form = document.getElementById('Form');
 
 Button_Stats.addEventListener('click', () => {
     fetch('./admin.php?action=fetch_stats')
-        .then(response => response.json())
+        // .then(response => response.json())
         .then(data => {
             const table = document.createElement('table');
             let html = '<tr><th>Язык программирования</th><th>Количество использований</th></tr>';
