@@ -17,7 +17,7 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
 
 if (isset($_GET['action']) && $_GET['action'] == 'fetch_stats') {
     header('Content-Type: application/json');
-    echo json_encode(getLanguageStats());
+    return json_encode(getLanguageStats());
     exit();
 }
 
