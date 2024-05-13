@@ -20,7 +20,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'fetch_stats') {
     echo json_encode(getLanguageStats());
     exit();
 }
-else: set($_GET['action']);
+else set($_GET['action']);
 
 print('Вы успешно авторизовались и видите защищенные паролем данные.');
 ?>
