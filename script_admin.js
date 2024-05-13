@@ -5,8 +5,10 @@ const Stats = document.getElementById('Stats');
 const Form = document.getElementById('Form');
 
 Button_Stats.addEventListener('click', () => {
+    
+    /*
     fetch('./admin.php?action=fetch_stats')
-        // .then(response => response.json())
+        .then(response => response.json())
         .then(data => {
             const table = document.createElement('table');
             let html = '<tr><th>Язык программирования</th><th>Количество использований</th></tr>';
@@ -18,7 +20,7 @@ Button_Stats.addEventListener('click', () => {
             Popup.appendChild(table);
             Popup.style.display = 'block';
         })
-        .catch(error => console.error('Ошибка:', error));
+        .catch(error => console.error('Ошибка:', error)); */
 });
 
 Button_Change.addEventListener('click', () => {
