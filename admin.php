@@ -25,7 +25,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'fetch_stats') {
 print('Вы успешно авторизовались и видите защищенные паролем данные.');
 ?>
 
-<button id="Button_Stats", class="Button_Stats, onclick="getLanguageStats()">Посмотреть статистику ответов</button>
+<button id="Button_Stats", class="Button_Stats, onclick=getLanguageStats()>Посмотреть статистику ответов</button>
 <button id="Button_Change", class="Button_Change">Редактировать пользователя</button>
 
 <div id="Popup" class="Popup">
