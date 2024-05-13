@@ -5,7 +5,7 @@ const Stats = document.getElementById('Stats');
 const Form = document.getElementById('Form');
 
 Button_Stats.addEventListener('click', () => {
-    fetch({url:'./admin.php?action=fetch_stats', method: 'POST'})
+    fetch('admin.php?action=fetch_stats')
         .then(response => response.json())
         .then(data => {
             const table = document.createElement('table');
