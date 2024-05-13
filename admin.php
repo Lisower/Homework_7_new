@@ -15,11 +15,12 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
   exit();
 }
 
-if (/*isset($_GET['action']) &&*/ $_GET['action'] == 'fetch_stats') {
+if (isset($_GET['action']) && $_GET['action'] == 'fetch_stats') {
     header('Content-Type: application/json');
     echo json_encode(getLanguageStats());
     exit();
 }
+else: set($_GET['action']);
 
 print('Вы успешно авторизовались и видите защищенные паролем данные.');
 ?>
