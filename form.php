@@ -22,7 +22,7 @@ if (!empty($messages)) {
     <button id="Button">Открыть форму</button>
 
         <div id="Popup" class="Popup">
-            <button id="Exit_Form" class="Exit">X</button>
+            <button id="Exit_Form" class="Exit_Form">X</button>
             <form id="Form" action="" method="POST">
                 <h1>Форма</h1>
 
