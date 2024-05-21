@@ -17,18 +17,18 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
 
 if (isset($_GET['action']) && $_GET['action'] == 'fetch_stats') {
     header('Content-Type: application/json');
-    echo json_encode(getLanguageStats());
+    try {
+        $stats = getLanguageStats();
+        echo json_encode($stats);
+    } catch (Exception $e) {
+        // Log the error message
+        error_log($e->getMessage());
+        // Return a JSON error response
+        echo json_encode(['error' => 'An error occurred while fetching stats.']);
+    }
     exit();
 }
 
 print('Вы успешно авторизовались и видите защищенные паролем данные.');
 ?>
 
-<button id="Button_Stats", class="Button_Stats">Посмотреть статистику ответов</button>
-<button id="Button_Change", class="Button_Change">Редактировать пользователя</button>
-
-<div id="Popup" class="Popup">
-    <div id="Stats" class="Stats">
-        
-    </div>
-</div>
