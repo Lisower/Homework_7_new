@@ -28,6 +28,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'fetch_stats') {
     }
     exit();
 }
+?>
+<button id="Button_Stats" class="Button_Stats">Посмотреть статистику ответов</button>
+<button id="Button_Change" class="Button_Change">Редактировать пользователя</button>
+<div id="Popup" class="Popup">
+    <div id="Stats" class="Stats"></div>
+</div>
 
 print('Вы успешно авторизовались и видите защищенные паролем данные.');
 ?>
