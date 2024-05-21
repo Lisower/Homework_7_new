@@ -5,7 +5,7 @@ const Stats = document.getElementById('Stats');
 const Form = document.getElementById('Form');
 
 Button_Stats.addEventListener('click', () => {
-    window.location.href = '/.stats.php';
+    window.location.href = './stats.php';
 });
 
 Button_Change.addEventListener('click', () => {
