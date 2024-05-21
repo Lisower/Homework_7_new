@@ -6,16 +6,8 @@ const Form = document.getElementById('Form');
 
 Button_Stats.addEventListener('click', () => {
     fetch('admin.php?action=fetch_stats')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
             const table = document.createElement('table');
             let html = '<tr><th>Язык программирования</th><th>Количество использований</th></tr>';
             data.forEach(row => {
@@ -26,14 +18,11 @@ Button_Stats.addEventListener('click', () => {
             Popup.appendChild(table);
             Popup.style.display = 'block';
         })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            alert('Произошла ошибка при получении статистики.');
-        });
+        .catch(error => console.error('Ошибка:', error));
 });
 
 Button_Change.addEventListener('click', () => {
-    // Your code for handling the change button click
+    
 });
 
 window.addEventListener('popstate', () => {
