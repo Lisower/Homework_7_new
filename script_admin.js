@@ -5,20 +5,7 @@ const Stats = document.getElementById('Stats');
 const Form = document.getElementById('Form');
 
 Button_Stats.addEventListener('click', () => {
-    fetch('admin.php?action=fetch_stats')
-        .then(response => response.json())
-        .then(data => {
-            const table = document.createElement('table');
-            let html = '<tr><th>Язык программирования</th><th>Количество использований</th></tr>';
-            data.forEach(row => {
-                html += `<tr><td>${row.name}</td><td>${row.count}</td></tr>`;
-            });
-            table.innerHTML = html;
-            Popup.innerHTML = '';
-            Popup.appendChild(table);
-            Popup.style.display = 'block';
-        })
-        .catch(error => console.error('Ошибка:', error));
+    window.location.href = '/.stats.php';
 });
 
 Button_Change.addEventListener('click', () => {
