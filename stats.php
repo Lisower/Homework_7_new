@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="style.css">
 <?php
 require 'db.php';
-$statsData = getLanguageStats();
+$statsData = getLanguageStats(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
