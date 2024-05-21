@@ -19,8 +19,8 @@ $statsData = getLanguageStats(); ?>
         </tr>
         <?php foreach ($statsData as $row): ?>
             <tr>
-                <td><?php echo $row->name; ?></td>
-                <td><?php echo $row->count; ?></td>
+                <td><?php echo $row['name']; ?></td>
+                <td><?php echo $row['count']; ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
