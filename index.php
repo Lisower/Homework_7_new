@@ -1,5 +1,5 @@
 <?php
-
+require 'db.php';
 header('Content-Type: text/html; charset=UTF-8');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -260,51 +260,49 @@ else {
 
   }
 
-  if (!empty($_COOKIE[session_name()]) &&
-      session_start() && !empty($_SESSION['login'])) {
-    include('credentials.php');
-    $db = new PDO('mysql:host=localhost;dbname=u67447', $GLOBALS['user'], $GLOBALS['pass'],
-      [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    
+  function updateApplication($data, $login, $pass) {
+    $columns = ['FIO', 'phone_number', 'e_mail', 'birthday', 'sex', 'biography'];
+    $values = [$data['FIO'], $data['phone_number'], $data['e_mail'], $data['birthday'], $data['sex'], $data['biography']];
+    $condition = 'login = ? AND pass = ?';
+    $conditionValues = [$login, $pass];
+    db_change('Applications', $columns, $values, $condition, $conditionValues);
+}
+
+function insertApplication($data, $login, $pass) {
+    $columns = ['FIO', 'phone_number', 'e_mail', 'birthday', 'sex', 'biography', 'login', 'pass'];
+    $values = [$data['FIO'], $data['phone_number'], $data['e_mail'], $data['birthday'], $data['sex'], $data['biography'], $login, $pass];
+    db_insert('Applications', $columns, $values);
+    return db_PDO()->lastInsertId();
+}
+
+function insertApplicationLanguages($application_id, $languages) {
+    foreach ($languages as $language_id) {
+        db_insert('Application_languages', ['application_id', 'language_id'], [$application_id, $language_id]);
+    }
+}
+
+if (!empty($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
     try {
-      $stmt = $db->prepare(
-        "update Applications SET FIO = ?, phone_number = ?, e_mail = ?, birthday = ?, sex = ?, biography = ? where login = ? and pass = ?");
-      $stmt->execute([$_POST['FIO'],$_POST['phone_number'],$_POST['e_mail'],$_POST['birthday'],$_POST['sex'],$_POST['biography'],
-                     $_SESSION['login'], $_SESSION['pass']]);
+        updateApplication($_POST, $_SESSION['login'], $_SESSION['pass']);
+    } catch (PDOException $e) {
+        print('Error : ' . $e->getMessage());
+        exit();
     }
-    catch(PDOException $e){
-      print('Error : ' . $e->getMessage());
-      exit();
-    }
-  }
-  else {
-    
-    $login = substr(md5($_COOKIE[session_name()].uniqid().rand()),0,7);
-    $password = substr(md5(uniqid().rand().$_COOKIE[session_name()].rand().$login),0,7);
-    
+} else {
+    $login = substr(md5($_COOKIE[session_name()].uniqid().rand()), 0, 7);
+    $password = substr(md5(uniqid().rand().$_COOKIE[session_name()].rand().$login), 0, 7);
+
     setcookie('login', $login);
     setcookie('pass', $password);
 
-    include('credentials.php');
-    $db = new PDO('mysql:host=localhost;dbname=u67447', $GLOBALS['user'], $GLOBALS['pass'],
-      [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    
     try {
-      $stmt = $db->prepare(
-        "INSERT INTO Applications SET FIO = ?, phone_number = ?, e_mail = ?, birthday = ?, sex = ?, biography = ?, login = ?, pass = ?");
-      $stmt->execute([$_POST['FIO'],$_POST['phone_number'],$_POST['e_mail'],$_POST['birthday'],$_POST['sex'],$_POST['biography'],
-                     $login, substr(md5($password),0,7)]);
-      $application_id = $db->lastInsertId();
-      $stmt = $db->prepare("INSERT INTO Application_languages (application_id, language_id) VALUES (?, ?)");
-      foreach ($_POST['favourite_languages'] as $language_id) {
-          $stmt->execute([$application_id, $language_id]); 
-      }
+        $application_id = insertApplication($_POST, $login, substr(md5($password), 0, 7));
+        insertApplicationLanguages($application_id, $_POST['favourite_languages']);
+    } catch (PDOException $e) {
+        print('Error : ' . $e->getMessage());
+        exit();
     }
-    catch(PDOException $e){
-      print('Error : ' . $e->getMessage());
-      exit();
-    }
-  }
+}
 
   setcookie('save', '1');
 
