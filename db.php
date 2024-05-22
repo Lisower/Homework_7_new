@@ -53,11 +53,3 @@ function getLanguageStats() {
     return $result->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
-
-function getLanguageStats() {
-    $db = db_PDO();
-    $query = "SELECT l.name as name, COUNT(*) as count FROM Application_languages Al JOIN Programming_languages l ON Al.language_id = l.id GROUP BY l.name";
-    $result = $db->query($query);
-    return $result->fetchAll(PDO::FETCH_ASSOC);
-}
-?>
