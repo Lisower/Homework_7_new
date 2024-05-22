@@ -13,7 +13,7 @@
 if (!empty($messages)) {
   print('<div id="messages">');
   foreach ($messages as $message) {
-    print($message);
+    print(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
   }
   print('</div>');
 }
