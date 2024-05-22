@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="style.css">
 <?php
-require 'db.php'
+require 'db.php';
 header('Content-Type: text/html; charset=UTF-8');
 
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
