@@ -16,7 +16,7 @@ function db_insert($table, $columns, $values) {
   $stmt->execute($values);
 }
 
-function db_change($table, $columns, $values, $condition) {
+function db_change($table, $columns, $values, $condition, $conditionValues) {
   $db = db_PDO();
   $setStatements = [];
   foreach ($columns as $key => $column) {
@@ -25,25 +25,34 @@ function db_change($table, $columns, $values, $condition) {
   $setStatements = implode(', ', $setStatements);
   $sql = "UPDATE $table SET $setStatements WHERE $condition";
   $stmt = $db->prepare($sql);
-  $stmt->execute($values);
+  $stmt->execute(array_merge($values, $conditionValues));
 }
 
-function db_select($table, $columns, $condition = '') {
+function db_select($table, $columns, $condition = '', $conditionValues = []) {
   $db = db_PDO();
   $query = "SELECT $columns FROM $table";
   if (!empty($condition)) {
     $query .= " WHERE $condition";
   }
-  $result = $db->query($query);
-  return $result->fetchAll(PDO::FETCH_ASSOC);
+  $stmt = $db->prepare($query);
+  $stmt->execute($conditionValues);
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function db_delete($table, $condition) {
+function db_delete($table, $condition, $conditionValues) {
   $db = db_PDO();
   $sql = "DELETE FROM $table WHERE $condition";
   $stmt = $db->prepare($sql);
-  $stmt->execute();
+  $stmt->execute($conditionValues);
 }
+
+function getLanguageStats() {
+    $db = db_PDO();
+    $query = "SELECT l.name as name, COUNT(*) as count FROM Application_languages Al JOIN Programming_languages l ON Al.language_id = l.id GROUP BY l.name";
+    $result = $db->query($query);
+    return $result->fetchAll(PDO::FETCH_ASSOC);
+}
+?>
 
 function getLanguageStats() {
     $db = db_PDO();
