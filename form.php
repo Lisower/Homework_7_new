@@ -30,7 +30,7 @@ if (!empty($messages)) {
                     ФИО<br>
                     <input name="FIO"
                     placeholder="Введите Ваше ФИО"
-                    <?php if ($errors['FIO_empty'] || $errors['FIO_error']) {print 'class="error"';} ?> value="<?php print $values['FIO']; ?>"
+                    <?php if ($errors['FIO_empty'] || $errors['FIO_error']) {print 'class="error"';} ?> value="<?php echo htmlspecialchars($values['FIO'], ENT_QUOTES, 'UTF-8'); ?>"
                     >
                 </label><br>
 
@@ -39,7 +39,7 @@ if (!empty($messages)) {
                 <input name="phone_number"
                     type="tel"
                     placeholder="Введите Ваш номер телефона"
-                    <?php if ($errors['phone_number_empty'] || $errors['phone_number_error']) {print 'class="error"';} ?> value="<?php print $values['phone_number']; ?>"
+                    <?php if ($errors['phone_number_empty'] || $errors['phone_number_error']) {print 'class="error"';} ?> value="<?php echo htmlspecialchars($values['phone_number'], ENT_QUOTES, 'UTF-8'); ?>"
                     >
                 </label><br>
 
@@ -48,7 +48,7 @@ if (!empty($messages)) {
                 <input name="e_mail"
                     type="email"
                     placeholder="Введите Вашу почту"
-                    <?php if ($errors['e_mail_empty'] || $errors['e_mail_error']) {print 'class="error"';} ?> value="<?php print $values['e_mail']; ?>"
+                    <?php if ($errors['e_mail_empty'] || $errors['e_mail_error']) {print 'class="error"';} ?> value="<?php echo htmlspecialchars($values['e_mail'], ENT_QUOTES, 'UTF-8'); ?>"
                     >
                 </label><br>
 
@@ -56,7 +56,7 @@ if (!empty($messages)) {
                     Дата рождения<br>
                     <input name="birthday"
                     type="date"
-                    <?php if ($errors['birthday_empty'] || $errors['birthday_error']) {print 'class="error"';} ?> value="<?php print $values['birthday']; ?>"
+                    <?php if ($errors['birthday_empty'] || $errors['birthday_error']) {print 'class="error"';} ?> value="<?php echo htmlspecialchars($values['birthday'], ENT_QUOTES, 'UTF-8'); ?>"
                     >
                 </label><br>
                 
