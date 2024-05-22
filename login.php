@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="style.css">
 <?php
-
+require 'db.php'
 header('Content-Type: text/html; charset=UTF-8');
 
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
@@ -27,13 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 
 else {
-  include('credentials.php');
-  $db = new PDO('mysql:host=localhost;dbname=u67447', $GLOBALS['user'], $GLOBALS['pass'],
-    [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-  $stmt = $db->prepare("select id from Applications where login = ? and pass = ?");
-  $stmt->execute([$_POST['login'], substr(md5($_POST['pass']),0,7)]);
-  $row_count = $stmt->rowCount();
-  if ($row_count <= 0) {
+  $result = db_select('Applications', 'id', 'login = ? and pass = ?', [$_POST['login'], substr(md5($_POST['pass']), 0, 7)]);
+  if (empty($result)) {
       print('Пользователя с такими логином и паролем нет в базе данных!');
       exit();
   }
